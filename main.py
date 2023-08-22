@@ -169,18 +169,17 @@ def main(lr = args.lr, batch_size = args.b, epochs = args.e, norm = args.norm, n
     global best_acc, start_epoch
     SEED = 69
 
-    # mps = torch.backends.mps.is_available()
-    # torch.manual_seed(SEED)
-    # if mps:
-    #     torch.mps.manual_seed(SEED)
-    # device = torch.device('mps' if mps else 'cpu')
-
-    use_cuda = torch.cuda.is_available()
+    mps = torch.backends.mps.is_available()
     torch.manual_seed(SEED)
-    if use_cuda:
-        torch.cuda.manual_seed(SEED)
-    
-    device = torch.device("cuda" if use_cuda else "cpu")
+    if mps:
+        torch.mps.manual_seed(SEED)
+    device = torch.device('mps')
+
+    # use_cuda = torch.cuda.is_available()
+    # torch.manual_seed(SEED)
+    # if use_cuda:
+    #     torch.cuda.manual_seed(SEED)
+    # device = torch.device("cuda" if use_cuda else "cpu")
     
     if norm == "batch":
         model = ResNet18(use_batchnorm=True).to(device)
