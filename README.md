@@ -1,1 +1,1 @@
-# cv_framework
+# Computer Vision Framework
